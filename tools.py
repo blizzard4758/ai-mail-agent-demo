@@ -103,7 +103,7 @@ def export_excel(email_uids: List[str] = None, path: str = "out/emails.xlsx") ->
 
 
 def send_email(to: str = "", subject: str = "", body: str = "", draft: bool = True) -> ToolResult:
-    # 安全闸门：默认 dry_run / draft=True 只生成草稿不真正发送
+    # 安全闸门 1：默认 dry_run / draft=True 只生成草稿不真正发送
     if settings.dry_run or draft:
         res = SendResult(sent=False, draft=True, to=to, subject=subject,
                          message="（草稿态，未实际发送）" + body)
@@ -111,9 +111,23 @@ def send_email(to: str = "", subject: str = "", body: str = "", draft: bool = Tr
             content=f"[草稿] 收件人={to} 主题={subject} —— 因 DRY_RUN/draft 未实际发送。"
                     f"如需真发，关闭 DRY_RUN 并确认收件人白名单。",
             data={"to": to})
-    # 真实发送占位：接 SMTP 需 smtp_host/user/pass（见 .env.example），此处留扩展点
-    res = SendResult(sent=True, draft=False, to=to, subject=subject, message=body)
-    return ToolResult(content=f"[已发送] 收件人={to} 主题={subject}", data={"to": to})
+    # 安全闸门 2：收件人白名单拦截（防误发），非空时不在名单内一律拒绝
+    if settings.send_whitelist and to not in settings.send_whitelist:
+        res = SendResult(sent=False, draft=False, to=to, subject=subject,
+                         message=f"收件人 {to} 不在白名单，已拦截（防误发）。白名单：{settings.send_whitelist}")
+        return ToolResult(
+            content=f"[已拦截] 收件人 {to} 不在 SEND_WHITELIST，未发送。请在 .env 把该地址加入白名单。",
+            data={"to": to})
+    # 真实发送：接 SMTP（见 .env：MAIL_SMTP_HOST/PORT/USER/PASS）
+    try:
+        from mail import SMTPClient
+        ok, msg = SMTPClient().send(to, subject, body)
+        res = SendResult(sent=ok, draft=False, to=to, subject=subject, message=msg)
+        return ToolResult(content=f"[已发送] {msg}", data={"to": to})
+    except Exception as e:
+        res = SendResult(sent=False, draft=False, to=to, subject=subject,
+                         message=f"发送失败：{e}")
+        return ToolResult(content=f"[发送失败] {e}", data={"to": to})
 
 
 # --------------------------------------------------------------------------- #

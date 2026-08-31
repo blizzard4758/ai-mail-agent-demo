@@ -245,7 +245,16 @@ def _safe_json_loads(s: str) -> Any:
 
 
 def get_llm() -> LLMClient:
-    """按配置返回 LLM 实现。DEMO_MODE 下强制 Mock，保证离线可演示。"""
+    """按配置返回 LLM 实现。
+
+    - LLM_PROVIDER=mock：强制确定性 Mock 大脑（即使 DEMO_MODE=false 也用）。
+      用途：关掉演示模式接真实邮箱时，可先用 mock 大脑验证 IMAP/SMTP 连通性，
+      无需先装好 Ollama。
+    - DEMO_MODE=true：强制 Mock，保证离线可演示。
+    - 其余：走 OllamaLLM（本地大模型，OpenAI 兼容 /v1 接口）。
+    """
+    if settings.llm_provider == "mock":
+        return MockLLM()
     if settings.demo_mode:
         return MockLLM()
     if settings.llm_provider == "ollama":

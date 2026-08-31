@@ -28,6 +28,9 @@ def main() -> int:
     if args.demo:
         import os
         os.environ["DEMO_MODE"] = "true"
+        import config
+        config.DEMO_MODE = True
+        config.settings.demo_mode = True
 
     print("=== 配置 ===")
     for k, v in summary().items():

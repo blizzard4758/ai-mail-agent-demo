@@ -55,7 +55,7 @@ AI-Mail-Agent/
 ├── agent.py            # ReAct 内核（手写，~120 行）
 ├── tools.py            # 工具层 + REGISTRY 插件化注册
 ├── llm.py              # LLM 层：MockLLM(离线) + OllamaLLM(真实) + JSON 守卫
-├── mail.py             # 邮件源：FixtureStore(默认) + IMAPStore(骨架)
+├── mail.py             # 邮件源：FixtureStore(默认) + IMAPStore(真实 IMAP) + SMTPClient(发信)
 ├── models.py           # Pydantic 数据模型 ×5（带 schema_version）
 ├── config.py           # 集中配置层（零依赖可加载）
 ├── requirements.txt
@@ -100,14 +100,60 @@ cd C:/Users/pc/Desktop/AI‑Mail‑Agent
 
 ---
 
-## ⚙️ 接真实大模型 / 真实邮箱（可选，演示版无需）
+## ⚙️ 接入真实邮箱（以 QQ 邮箱为例）
 
-复制 `.env.example` 为 `.env`：
-- 本地装 [Ollama](https://ollama.com)，拉模型 `ollama pull qwen2.5:7b`
-- 设 `DEMO_MODE=false`、`LLM_PROVIDER=ollama`、`LLM_BASE_URL=http://localhost:11434/v1`
-- 真实邮箱：填 `MAIL_HOST/MAIL_USER/MAIL_PASS`（国内邮箱用**应用专用密码**，非登录密码）
+> 演示版默认离线（`DEMO_MODE=true` + fixture），**接真实邮箱完全可选**。本项目已把
+> `IMAPStore`（收）/ `SMTPClient`（发）写成真实可用实现，业务代码一行不用改——这就是
+> 「可插拔 / 可更新」的价值。
 
-业务代码一行不用改——这就是「可插拔」的价值。
+### 步骤 1：在 QQ 邮箱里开启 IMAP/SMTP 并取「授权码」
+1. 网页登录 QQ 邮箱 → **设置 → 账户**
+2. 找到「IMAP/SMTP 服务」，点「开启」（需发短信验证）
+3. 复制生成的 **授权码**（16 位，形如 `abcd efgh ijkl mnop`）
+   ⚠️ 授权码 ≠ 登录密码。代码里 `MAIL_PASS` 填授权码，不是 QQ 密码。
+
+### 步骤 2：填 `.env`
+```bash
+cp .env.example .env
+```
+编辑 `.env`：
+```ini
+DEMO_MODE=false
+MAIL_HOST=imap.qq.com
+MAIL_PORT=993
+MAIL_USER=你的QQ号@qq.com
+MAIL_PASS=你的授权码            # 不是密码！
+
+MAIL_SMTP_HOST=smtp.qq.com
+MAIL_SMTP_PORT=465
+MAIL_SMTP_USER=                # 留空则复用 MAIL_USER
+MAIL_SMTP_PASS=                # 留空则复用 MAIL_PASS
+SEND_WHITELIST=a@qq.com,b@163.com   # 真实发信白名单，防误发；留空=不限制(仅测试)
+```
+
+### 步骤 3：先验证连通性（无需 Ollama）
+设 `LLM_PROVIDER=mock`，这样接真实邮箱但用确定性"假大脑"，断网也能验证 IMAP/SMTP：
+```bash
+.\.venv\Scripts\python.exe app.py -i "检索未读邮件并过滤垃圾邮件"
+```
+或直接用界面：`.\.venv\Scripts\python.exe app_ui.py`，**取消勾选「演示模式」**后运行。
+看到真实邮件列表 + 垃圾标记即说明 IMAP 通了。
+
+### 步骤 4：接真实大模型（可选）
+本地装 [Ollama](https://ollama.com)，`ollama pull qwen2.5:7b`，设
+`LLM_PROVIDER=ollama`（`LLM_BASE_URL` 默认 `http://localhost:11434/v1`）。
+此时 Agent 的"思考/摘要"由本地模型驱动，全程免费、数据不出本机。
+
+### 其他邮箱速查
+| 邮箱 | IMAP | SMTP |
+|---|---|---|
+| QQ | imap.qq.com:993 | smtp.qq.com:465 |
+| 163 | imap.163.com:993 | smtp.163.com:465 |
+| Gmail | imap.gmail.com:993 | smtp.gmail.com:465（需「应用专用密码」） |
+| Outlook | outlook.office365.com:993 | smtp.office365.com:587(STARTTLS) |
+
+> 注：`IMAPStore`/`SMTPClient` 用标准库实现，换邮箱只需改 `.env` 主机名与端口，
+> 465 走 SSL、其余端口走 STARTTLS，无需改代码。
 
 ---
 
@@ -117,7 +163,7 @@ cd C:/Users/pc/Desktop/AI‑Mail‑Agent
 - [x] **AI 摘要**：分类 / 优先级 / 是否需跟进 / 要点（结构化 JSON，带校验+降级）
 - [x] **垃圾过滤**：规则层，确定性、可解释，输出命中统计
 - [x] **导出 Excel**：pandas → openpyxl，一键导出
-- [x] **发送邮件**：默认草稿闸门（dry_run），Human-in-the-loop 待扩展
+- [x] **发送邮件**：默认草稿闸门（dry_run）；关闭后真实 SMTP 发送，并受收件人白名单拦截
 - [x] **自然语言入口**：一条指令驱动多步工具编排
 - [x] **Trace 可视化**：每步思考→工具→参数→结果逐帧回放
 - [ ] 附件内容解析（后续）
