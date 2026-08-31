@@ -49,6 +49,20 @@ OUT_DIR: str = os.getenv("OUT_DIR", "out")
 # 输出目录确保存在
 os.makedirs(OUT_DIR, exist_ok=True)
 
+# 统一配置对象：业务代码通过 `from config import settings` 访问，字段命名贴近语义。
+from types import SimpleNamespace
+
+settings = SimpleNamespace(
+    demo_mode=DEMO_MODE,
+    dry_run=DRY_RUN,
+    llm_provider=LLM_PROVIDER,
+    ollama_base_url=LLM_BASE_URL,
+    model=LLM_MODEL,
+    imap_host=MAIL_HOST,
+    imap_user=MAIL_USER,
+    imap_pass=MAIL_PASS,
+)
+
 
 def summary() -> dict:
     """脱敏后的配置快照，便于启动时打印 / 调试。"""
