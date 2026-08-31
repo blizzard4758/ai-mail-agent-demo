@@ -5,6 +5,10 @@ __pycache__/
 *.pyc
 .pytest_cache/
 
+# AI 工作记忆/技能缓存（不应随代码推送）
+.workbuddy/
+.claude/
+
 # 运行产物
 out/
 *.db
