@@ -1,0 +1,460 @@
+[
+  {
+    "uid": "1",
+    "message_id": "msg-001@aimail.local",
+    "sender": "hr@corp.example.com",
+    "sender_name": "人事部",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "关于2026年中秋放假安排的通知",
+    "date": "2026-08-31T09:30:00",
+    "body_text": "各位同事：经公司决定，中秋节放假调休共3天（9月25日至27日）。请提前安排工作交接，假前请关闭办公设备电源。\n人力资源部",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "2",
+    "message_id": "msg-002@aimail.local",
+    "sender": "li.ming@corp.example.com",
+    "sender_name": "李明",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "接口联调问题确认",
+    "date": "2026-08-30T14:30:00",
+    "body_text": "张工：订单服务的登录接口在预发环境偶发 500，怀疑是 token 过期未刷新。方便今天下午对一下吗？",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "3",
+    "message_id": "msg-003@aimail.local",
+    "sender": "wang.fang@client.example.com",
+    "sender_name": "王芳(客户)",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "合同终稿请确认",
+    "date": "2026-08-30T16:30:00",
+    "body_text": "罗工您好，附件为合作框架合同终稿，主要调整了 SLA 条款。若无异议请于本周内回签。",
+    "has_attachment": true,
+    "attachment_names": [
+      "合同终稿.pdf"
+    ],
+    "is_read": true
+  },
+  {
+    "uid": "4",
+    "message_id": "msg-004@aimail.local",
+    "sender": "notifications@github.example.com",
+    "sender_name": "GitHub",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "[topology_viewer] Your pull request #12 was merged",
+    "date": "2026-08-31T11:30:00",
+    "body_text": "Pull request #12 'feat: vite proxy' was merged by Luo_Jianan. View it on GitHub.",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "5",
+    "message_id": "msg-005@aimail.local",
+    "sender": "noreply@feishu.example.com",
+    "sender_name": "飞书",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "你有一条待办：周三项目周会纪要",
+    "date": "2026-08-31T10:30:00",
+    "body_text": "【待办】请于今日 18:00 前确认本周周会纪要。发起人：项目管理办公室。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "6",
+    "message_id": "msg-006@aimail.local",
+    "sender": "jira@corp.example.com",
+    "sender_name": "Jira",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "[TOPO-123] Bug fix ready for review",
+    "date": "2026-08-29T15:30:00",
+    "body_text": "TOPO-123 拓扑渲染偶发错位已修复，等待 Code Review。分支：fix/render-offset。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": true
+  },
+  {
+    "uid": "7",
+    "message_id": "msg-007@aimail.local",
+    "sender": "billing@bank.example.com",
+    "sender_name": "招商银行",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "您的8月信用卡账单已生成",
+    "date": "2026-08-28T08:30:00",
+    "body_text": "尊敬的客户，您8月信用卡账单已出，应还金额 3280.00 元，还款日 9月15日。如非本人操作请联系客服。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": true
+  },
+  {
+    "uid": "8",
+    "message_id": "msg-008@aimail.local",
+    "sender": "newsletter@techweekly.example.com",
+    "sender_name": "技术周刊",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "技术周刊第208期：Agent 工程实践",
+    "date": "2026-08-29T07:30:00",
+    "body_text": "本期精选：ReAct 与 Plan-and-Execute 对比、如何给 LLM 加工具调用护栏、向量库选型避坑。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "9",
+    "message_id": "msg-009@aimail.local",
+    "sender": "zhang.wei@corp.example.com",
+    "sender_name": "张伟",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "明天上午10点项目评审",
+    "date": "2026-08-31T18:30:00",
+    "body_text": "罗工，明早10点评审拓扑项目里程碑，地点 A 会议室。以下是上次讨论的结论：\n> 我们决定先做插件化工具层\n> 缓存放内存即可\n请准备 demo。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "10",
+    "message_id": "msg-010@aimail.local",
+    "sender": "it@corp.example.com",
+    "sender_name": "IT支持",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "机房维护通知（本周六凌晨）",
+    "date": "2026-08-27T17:30:00",
+    "body_text": "本周六 02:00-04:00 核心机房网络切换，期间内部系统可能短暂不可用，请提前保存工作。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": true
+  },
+  {
+    "uid": "11",
+    "message_id": "msg-011@aimail.local",
+    "sender": "recruiter@hr.example.com",
+    "sender_name": "HR",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "面试邀约：高级 Agent 工程师",
+    "date": "2026-08-30T20:30:00",
+    "body_text": "您好，看到您在某平台分享的 Agent 项目，邀请您参加高级 Agent 工程师岗位面试，时间可协调。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "12",
+    "message_id": "msg-012@aimail.local",
+    "sender": "support@saas.example.com",
+    "sender_name": "SaaS 支持",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "您的订阅将于3天后续费",
+    "date": "2026-08-28T12:30:00",
+    "body_text": "您的团队版订阅将于 9月3日 自动续费 999 元/年，如需调整套餐请在后台操作。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": true
+  },
+  {
+    "uid": "13",
+    "message_id": "msg-013@aimail.local",
+    "sender": "chen@partner.example.com",
+    "sender_name": "陈工(合作方)",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "对接文档已更新，见附件",
+    "date": "2026-08-29T11:30:00",
+    "body_text": "罗工，对接方案已根据上次评审更新，新增鉴权章节。详见附件。",
+    "has_attachment": true,
+    "attachment_names": [
+      "对接方案.docx"
+    ],
+    "is_read": false
+  },
+  {
+    "uid": "14",
+    "message_id": "msg-014@aimail.local",
+    "sender": "system@corp.example.com",
+    "sender_name": "系统",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "密码即将过期提醒",
+    "date": "2026-08-26T09:30:00",
+    "body_text": "您的域账号密码将于 7 天后过期，请尽快在自助门户修改。如已修改可忽略。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": true
+  },
+  {
+    "uid": "15",
+    "message_id": "msg-015@aimail.local",
+    "sender": "luo@corp.example.com",
+    "sender_name": "罗佳楠",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "拓扑项目 dev 分支联调事项",
+    "date": "2026-08-31T13:30:00",
+    "body_text": "张工，dev 分支已合入 proxy 配置，麻烦在本地 pull 后跑一遍联调，重点看 8302 端口转发是否稳定。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "16",
+    "message_id": "msg-016@aimail.local",
+    "sender": "finance@corp.example.com",
+    "sender_name": "财务部",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "差旅报销请于月底前提单",
+    "date": "2026-08-31T15:30:00",
+    "body_text": "各位，8月差旅报销请于 8月31日 前提交，逾期将顺延至下月。报销系统：oa.finance.example.com。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "17",
+    "message_id": "msg-017@aimail.local",
+    "sender": "yang@university.example.com",
+    "sender_name": "杨教授",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "论文审稿意见返回",
+    "date": "2026-08-25T10:30:00",
+    "body_text": "同学，你投稿的论文外审意见已返回，整体评价积极，需补实验对比。详见附件审稿单。",
+    "has_attachment": true,
+    "attachment_names": [
+      "审稿单.pdf"
+    ],
+    "is_read": true
+  },
+  {
+    "uid": "18",
+    "message_id": "msg-018@aimail.local",
+    "sender": "admin@conference.example.com",
+    "sender_name": "会议组委会",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "ICML Workshop 注册开放",
+    "date": "2026-08-26T14:30:00",
+    "body_text": "ICML 2026 Agent 评测 Workshop 注册已开放，早鸟价截至 9月10日。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "19",
+    "message_id": "msg-019@aimail.local",
+    "sender": "devops@corp.example.com",
+    "sender_name": "DevOps",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "生产环境发布窗口申请",
+    "date": "2026-08-28T16:30:00",
+    "body_text": "请在本周提交下个迭代的发布窗口申请，灰度策略需注明。模板见 Wiki。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": true
+  },
+  {
+    "uid": "20",
+    "message_id": "msg-020@aimail.local",
+    "sender": "marketing@corp.example.com",
+    "sender_name": "市场部",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "下季度品牌物料需求收集",
+    "date": "2026-08-27T11:30:00",
+    "body_text": "各位产品同学，下季度品牌物料需求开始收集，请于周五前填写在线表单，备注优先级。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "21",
+    "message_id": "msg-021@aimail.local",
+    "sender": "zhao@law.example.com",
+    "sender_name": "赵律师",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "法律意见书已出，请查收",
+    "date": "2026-08-29T19:30:00",
+    "body_text": "罗工，关于数据处理合规的法律意见书已出具，主要结论是需补充用户授权链路。详见附件。",
+    "has_attachment": true,
+    "attachment_names": [
+      "法律意见书.pdf"
+    ],
+    "is_read": true
+  },
+  {
+    "uid": "22",
+    "message_id": "msg-022@aimail.local",
+    "sender": "service@ecommerce.example.com",
+    "sender_name": "电商客服",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "您的订单已发货",
+    "date": "2026-08-30T12:30:00",
+    "body_text": "您购买的开发板已发货，快递：顺丰 SF1234567890，预计 9月1日 送达。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "23",
+    "message_id": "msg-023@aimail.local",
+    "sender": "winner@lucky-prize.example.com",
+    "sender_name": "中奖通知",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "恭喜您获得 iPhone 抽奖资格",
+    "date": "2026-08-31T22:30:00",
+    "body_text": "尊敬的用户，您被抽中为幸运用户，可免费领取 iPhone 16 Pro！点击链接填写地址即可领取，仅限今日。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "24",
+    "message_id": "msg-024@aimail.local",
+    "sender": "loan@fastcash.example.com",
+    "sender_name": "急速放款",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "极速放款，无需抵押",
+    "date": "2026-08-30T03:30:00",
+    "body_text": "急需用钱？日息低至0.02%，凭身份证即可放款，不加好友不收费，扫码立即申请。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "25",
+    "message_id": "msg-025@aimail.local",
+    "sender": "security@acc-verify.example.com",
+    "sender_name": "账户安全",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "【紧急】您的账户异常，请立即验证",
+    "date": "2026-08-31T23:30:00",
+    "body_text": "检测到您的账户在异地登录，如非本人操作请于30分钟内点击验证，否则账户将被冻结。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "26",
+    "message_id": "msg-026@aimail.local",
+    "sender": "promo@shopmall.example.com",
+    "sender_name": "商城促销",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "年中大促！全场5折",
+    "date": "2026-08-29T20:30:00",
+    "body_text": "年中大促正式开启，全场5折起，满299减100，仅限3天！退订请回复 TD。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": true
+  },
+  {
+    "uid": "27",
+    "message_id": "msg-027@aimail.local",
+    "sender": "crypto@btc-invest.example.com",
+    "sender_name": "币圈带单",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "比特币暴涨，加群带单稳赚",
+    "date": "2026-08-28T02:30:00",
+    "body_text": "BTC 突破压力位，老师带单胜率90%，加群免费领策略，本金不到场不收费（风险自担）。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "28",
+    "message_id": "msg-028@aimail.local",
+    "sender": "fapiao@invoice-agent.example.com",
+    "sender_name": "发票代理",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "代开各种发票",
+    "date": "2026-08-27T01:30:00",
+    "body_text": "本公司可代开增值税普通发票、专用发票，税点低、快出，欢迎咨询，详询微信。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "29",
+    "message_id": "msg-029@aimail.local",
+    "sender": "vip@adult-dating.example.com",
+    "sender_name": "附近交友",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "附近有人想认识你",
+    "date": "2026-08-26T00:30:00",
+    "body_text": "您所在区域有 12 位用户想认识你，点击查看资料，注册即送会员。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  },
+  {
+    "uid": "30",
+    "message_id": "msg-030@aimail.local",
+    "sender": "admin@malware.example.com",
+    "sender_name": "邮箱助手",
+    "recipients": [
+      "me@example.com"
+    ],
+    "subject": "您的邮箱已满，点击领取容量",
+    "date": "2026-08-25T06:30:00",
+    "body_text": "您的邮箱容量已达99%，点击链接领取 50G 扩容，否则新邮件将无法接收。",
+    "has_attachment": false,
+    "attachment_names": [],
+    "is_read": false
+  }
+]

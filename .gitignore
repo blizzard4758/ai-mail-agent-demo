@@ -1,0 +1,11 @@
+# 环境与密钥
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# 运行产物
+out/
+*.db
+traces/
