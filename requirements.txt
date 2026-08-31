@@ -1,3 +1,5 @@
+# 依赖保持精简（6 个）。mailparser 已移除：fixture 假邮件为预解析 JSON，
+# 真实 IMAP 用标准库 email 模块解析，零第三方 MIME 依赖、更稳。
 pydantic>=2.7
 pandas>=2.2
 openpyxl>=3.1
