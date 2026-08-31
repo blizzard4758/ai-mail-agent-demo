@@ -139,10 +139,47 @@ SEND_WHITELIST=a@qq.com,b@163.com   # 真实发信白名单，防误发；留空
 或直接用界面：`.\.venv\Scripts\python.exe app_ui.py`，**取消勾选「演示模式」**后运行。
 看到真实邮件列表 + 垃圾标记即说明 IMAP 通了。
 
-### 步骤 4：接真实大模型（可选）
-本地装 [Ollama](https://ollama.com)，`ollama pull qwen2.5:7b`，设
-`LLM_PROVIDER=ollama`（`LLM_BASE_URL` 默认 `http://localhost:11434/v1`）。
-此时 Agent 的"思考/摘要"由本地模型驱动，全程免费、数据不出本机。
+### 步骤 4：接真实大模型（二选一，可选）
+
+本项目 LLM 层是**标准 OpenAI 兼容客户端**（`llm.py` 的 `OllamaLLM`）：请求
+`{LLM_BASE_URL}/v1/chat/completions`，支持 Function Calling（工具调用）。因此既能接
+本地 Ollama，也能直接接任意 OpenAI 兼容云 API（DeepSeek、通义千问、OpenAI 等），
+**只改 `.env`，不动代码**——同样是「可插拔」的价值。
+
+#### 方案 A：本地 Ollama（推荐 · 免费 · 数据不出本机 · 面试可断网友好）
+1. 装 [Ollama](https://ollama.com)，启动后默认监听 `http://localhost:11434`
+2. 拉中文模型：`ollama pull qwen2.5:7b`（7B，约 4GB 显存；机器弱改用 `qwen2.5:3b`）
+3. `.env` 设：
+   ```ini
+   DEMO_MODE=false
+   LLM_PROVIDER=ollama
+   LLM_BASE_URL=http://localhost:11434   # 根地址，不要带 /v1
+   LLM_MODEL=qwen2.5:7b
+   ```
+4. 跑：`python app.py -i "检索未读邮件并生成摘要并导出"`（或界面取消勾选「演示模式」）。
+   Agent 的「思考 / 摘要」即由本地模型驱动。
+
+#### 方案 B：云端 API（DeepSeek / 通义千问，需联网 + API Key）
+1. 去 [DeepSeek 平台](https://platform.deepseek.com) 或阿里云百炼拿 API Key
+2. `.env` 设（以 DeepSeek 为例）：
+   ```ini
+   DEMO_MODE=false
+   LLM_PROVIDER=openai
+   LLM_BASE_URL=https://api.deepseek.com     # 根地址，代码自动拼 /v1
+   LLM_API_KEY=sk-你的key
+   LLM_MODEL=deepseek-chat
+   ```
+   通义千问：`LLM_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode`、
+   `LLM_MODEL=qwen-plus`；OpenAI：`LLM_BASE_URL=https://api.openai.com`、`LLM_MODEL=gpt-4o-mini`。
+3. 验证同上。
+   > 云 API 走公网、按 token 计费；**面试现场演示建议用方案 A**，避免联网/密钥/限流风险。
+
+#### 怎么确认 LLM 真的接上了？
+```bash
+.\.venv\Scripts\python.exe -c "from llm import get_llm; c=get_llm(); print(type(c).__name__)"
+# 期望输出 OllamaLLM（DEMO_MODE=false 且 PROVIDER=ollama/openai）
+# 输出 MockLLM 说明还在演示/ mock 模式，检查 DEMO_MODE 与 LLM_PROVIDER
+```
 
 ### 其他邮箱速查
 | 邮箱 | IMAP | SMTP |

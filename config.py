@@ -31,7 +31,7 @@ DRY_RUN: bool = _as_bool(os.getenv("DRY_RUN"), default=True)
 
 # LLM
 LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "ollama")
-LLM_BASE_URL: str = os.getenv("LLM_BASE_URL", "http://localhost:11434/v1")
+LLM_BASE_URL: str = os.getenv("LLM_BASE_URL", "http://localhost:11434")  # 填「根地址」，代码自动拼 /v1/chat/completions
 LLM_API_KEY: str = os.getenv("LLM_API_KEY", "ollama")
 LLM_MODEL: str = os.getenv("LLM_MODEL", "qwen2.5:7b")
 
@@ -68,6 +68,7 @@ settings = SimpleNamespace(
     dry_run=DRY_RUN,
     llm_provider=LLM_PROVIDER,
     ollama_base_url=LLM_BASE_URL,
+    llm_api_key=LLM_API_KEY,
     model=LLM_MODEL,
     imap_host=MAIL_HOST,
     imap_port=MAIL_PORT,

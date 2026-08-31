@@ -176,12 +176,13 @@ def _mock_final_answer(instruction: str, state: Dict[str, Any]) -> str:
 
 
 # --------------------------------------------------------------------------- #
-# OllamaLLM：真实可调用的本地大模型（OpenAI 兼容 /v1 接口）
+# OllamaLLM：任意 OpenAI 兼容端点（本地 Ollama / 云端 DeepSeek、通义千问、OpenAI 等）
 # --------------------------------------------------------------------------- #
 class OllamaLLM(LLMClient):
     def __init__(self):
-        self.base = settings.ollama_base_url.rstrip("/")   # http://localhost:11434
+        self.base = settings.ollama_base_url.rstrip("/")   # http://localhost:11434（根地址）
         self.model = settings.model
+        self.api_key = settings.llm_api_key
 
     # ---- 底层：OpenAI 兼容 chat/completions ----
     def _chat(self, messages, tools=None, tool_choice=None) -> dict:
@@ -190,10 +191,13 @@ class OllamaLLM(LLMClient):
             payload["tools"] = tools
             if tool_choice:
                 payload["tool_choice"] = tool_choice
+        headers = {"Content-Type": "application/json"}
+        if self.api_key:
+            headers["Authorization"] = f"Bearer {self.api_key}"
         req = urllib.request.Request(
             self.base + "/v1/chat/completions",
             data=json.dumps(payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
+            headers=headers,
         )
         with urllib.request.urlopen(req, timeout=120) as resp:
             return json.loads(resp.read().decode("utf-8"))
@@ -257,7 +261,7 @@ def get_llm() -> LLMClient:
         return MockLLM()
     if settings.demo_mode:
         return MockLLM()
-    if settings.llm_provider == "ollama":
-        return OllamaLLM()
-    # 预留：未来可加 OpenAI / 通义等
+    if settings.llm_provider in ("ollama", "openai"):
+        return OllamaLLM()  # 任意 OpenAI 兼容端点：本地 Ollama / 云端 DeepSeek、通义等
+    # 预留：未来可加其他厂商
     return MockLLM()
